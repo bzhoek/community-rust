@@ -135,8 +135,6 @@ public class ClippyJsonReportReader {
     if (reportTarget == null)
       return; // Exit silently when JSON is not compliant
 
-    clippyIssue.filePath = (String) reportTarget.get("src_path");
-    System.out.println(reportTarget.get("src_path"));
     clippyIssue.message = (String) message.get(MESSAGE);
     JSONArray children = (JSONArray) message.get("children");
 
@@ -146,6 +144,7 @@ public class ClippyJsonReportReader {
 
     JSONObject span = (JSONObject) spans.get(0);
 
+    clippyIssue.filePath = (String) span.get("file_name");
     clippyIssue.lineNumberStart = toInteger(span.get("line_start"));
     clippyIssue.lineNumberEnd = toInteger(span.get("line_end"));
     clippyIssue.colNumberStart = toInteger(span.get("column_start"));
